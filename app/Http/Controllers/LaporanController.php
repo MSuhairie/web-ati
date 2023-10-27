@@ -25,18 +25,59 @@ class LaporanController extends Controller
     public function filter()
     {
         $data = [
-            'start_date' => Request()->start_date,
-            'end_date' => Request()->end_date,
+            'start_date' => request()->input('start_date'),
+            'end_date' => request()->input('end_date'),
+            'status' => request()->input('status'),
         ];
 
+        $filteredItems = $this->getFilteredData($data);
+
+        return view('Admin.Laporan.index', ['laporans' => $filteredItems, 'filterData' => $data]);
+    }
+
+    public function cetakview()
+    {
+        $data = request()->query();
+
+        $filteredItems = $this->getFilteredData($data);
+
+        return view('Admin.Laporan.cetak', ['laporans' => $filteredItems, 'filterData' => $data, 'print' => true]);
+    }
+
+    private function getFilteredData($data)
+    {
         $filteredItems = DB::table('tb_laporan')
             ->leftJoin('tb_user_android as pelapor', 'tb_laporan.id_pelapor', '=', 'pelapor.id')
             ->leftJoin('tb_user_android as teknisi', 'tb_laporan.id_teknisi', '=', 'teknisi.id')
-            ->select('tb_laporan.*', 'pelapor.name as nama_pelapor', 'teknisi.name as nama_teknisi')
-            ->whereBetween('tanggal', [$data])
-            ->get();
+            ->select('tb_laporan.*', 'pelapor.name as nama_pelapor', 'teknisi.name as nama_teknisi');
 
-        return view('Admin.Laporan.index', ['laporans' => $filteredItems]);
+        // Pemeriksaan apakah elemen 'start_date' dan 'end_date' ada dalam array
+        if (isset($data['start_date']) && isset($data['end_date'])) {
+            $filteredItems->whereBetween('tanggal', [$data['start_date'], $data['end_date']]);
+        }
+
+        if (isset($data['status'])) {
+            $filteredItems->where('status', $data['status']);
+        }
+
+        return $filteredItems->get();
+    }
+
+    public function detail($id)
+    {
+        $data = [
+            'laporans' =>$this->Laporan->DetailData($id),
+        ];
+        return view('Admin.Laporan.detail', $data);
+    }
+
+    public function cetakall()
+    {
+        $data = [
+            'laporans' => $this->Laporan->TampilData()
+        ];
+
+        return view('Admin.Laporan.cetak', $data);
     }
 
 }

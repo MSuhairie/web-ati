@@ -24,3 +24,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->na
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home_admin');
 Route::get('/laporan', [LaporanController::class, 'index'])->middleware('auth')->name('laporan');
 Route::post('/laporandata', [LaporanController::class, 'filter'])->middleware('auth')->name('laporandata');
+Route::get('/detailcetak/{id}', [LaporanController::class, 'detail'])->middleware('auth')->name('detailcetak');
+Route::get('/cetaklaporan', [LaporanController::class, 'cetakview'])->middleware('auth')->name('cetaklaporan');
+
+Route::get('/cetaksemualaporan', [LaporanController::class, 'cetakall'])->name('cetaksemualaporan');
