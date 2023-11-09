@@ -19,7 +19,7 @@
   <link id="pagestyle" href="{{ asset('assets') }}/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
-<body class="">
+<body>
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-100">
@@ -28,8 +28,8 @@
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
               <div class="card card-plain">
                 <div class="card-header pb-0 text-start">
-                  {{-- <h4 class="font-weight-bolder text-center" style="color: #2dce89;">Login</h4> --}}
-                  <img src="{{ asset('assets/foto/logo_atip.png') }}" width="100px" style="margin-left: 95px; position: relative;">
+                  <h4 class="font-weight-bolder text-center d-lg-block d-none">Login</h4>
+                   <img class="d-lg-none d-block mx-auto" src="{{ asset('assets/foto/logo_atip.png') }}" width="100px">
                 </div>
                 <div class="card-body">
                   <form role="form" method="POST" action="{{ route('post-login') }}">
@@ -59,9 +59,9 @@
             </div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
               <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('{{ asset('assets/foto/gambar.jpg') }}');
-          background-size: cover;">
+          background-size: cover; background-position:center;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
-                <img src="{{ asset('assets/foto/logo_atip.png') }}" width="100px" style="margin-left: 170px; position: relative;">
+                <img src="{{ asset('assets/foto/logo_atip.png') }}" width="100px" class="position-relative mx-auto">
                 <h4 class="mt-3 text-white font-weight-bolder position-relative">Silakan Login</h4>
                 <p class="text-white position-relative font-weight-bolder">Politeknik Ati Padang</p>
               </div>

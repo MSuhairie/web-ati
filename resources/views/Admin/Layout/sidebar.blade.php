@@ -35,6 +35,26 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('/laporanperbulan') ? 'active' : '' }}" href="{{ route('laporanperbulan') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-collection text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Laporan Perbulan</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('/laporanpertahun') ? 'active' : '' }}" href="{{ route('laporanpertahun') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-collection text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Laporan Pertahun</span>
+                </a>
+            </li>
+
             {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}" onclick="return confirm('Anda Yakin Ingin Logout ?');">
                     <div

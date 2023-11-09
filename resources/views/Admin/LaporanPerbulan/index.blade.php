@@ -1,5 +1,5 @@
 @extends('Admin.Layout.index')
-@section('title', 'Laporan')
+@section('title', 'Laporan Perbulan')
 @section('content')
 
 
@@ -8,20 +8,24 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-                <form method="POST" action="{{ route('laporandata') }}">
+                <form method="POST" action="{{ route('laporanperbulandata') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-3">
                           <div class="form-group">
-                            <label class="form-control-label">Dari:</label>
-                            <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}">
+                            <label class="form-control-label">Bulan:</label>
+                            <select name="bulan" id="bulan" class="form-control">
+                              <option value="">-- Pilih Bulan --</option>
+                            </select>
                           </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                              <label class="form-control-label">Sampai:</label>
-                              <input type="date" class="form-control" name="end_date" value="{{ old('end_date') }}">
+                              <label class="form-control-label">Tahun:</label>
+                              <select name="tahun" id="tahun" class="form-control">
+                                <option value="">-- Pilih Tahun --</option>
+                              </select>
                             </div>
                         </div>
 
@@ -102,7 +106,7 @@
                             <td>Rp. {{ number_format($data->biaya, 0, ',', '.') }}</td>
                             <td><img src="{{ asset($data->foto)}}" width="50px" height="50px"></a></td>
                             <td>
-                                <a class="btn btn-success text-xs px-3" href="{{ route('detailcetak', $data->id) }}" target="_blank">Cetak</a>
+                                <a class="btn btn-success text-xs px-3" href="{{ route('detailcetaklaporanperbulan', $data->id) }}" target="_blank">Cetak</a>
                             </td>
                           </tr>
                           @endforeach
@@ -114,5 +118,33 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Mendapatkan elemen select
+      var selectTahun = document.getElementById('tahun');
+      var selectBulan = document.getElementById('bulan');
+  
+      // Loop untuk menambahkan opsi tahun dari 2023 hingga 2020
+      for (var tahun = 2023; tahun >= 2020; tahun--) {
+          var option = document.createElement('option');
+          option.value = tahun;
+          option.text = tahun;
+          selectTahun.appendChild(option);
+      }
+
+      // Daftar nama bulan
+      var namaBulan = [
+          "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+          "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      // Loop untuk menambahkan opsi bulan secara otomatis
+      for (var i = 0; i < namaBulan.length; i++) {
+          var option = document.createElement('option');
+          option.value = i + 1; // Nilai bulan dimulai dari 1 (Januari) hingga 12 (Desember)
+          option.text = namaBulan[i];
+          selectBulan.appendChild(option);
+      }
+    </script>
 
 @endsection

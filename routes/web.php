@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanPerbulanController;
+use App\Http\Controllers\LaporanPertahunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,15 @@ Route::get('/detailcetak/{id}', [LaporanController::class, 'detail'])->middlewar
 Route::get('/cetaklaporan', [LaporanController::class, 'cetakview'])->middleware('auth')->name('cetaklaporan');
 
 Route::get('/cetaksemualaporan', [LaporanController::class, 'cetakall'])->name('cetaksemualaporan');
+
+// Laporan Perbulan
+Route::get('/laporanperbulan', [LaporanPerbulanController::class, 'index'])->middleware('auth')->name('laporanperbulan');
+Route::post('/laporanperbulandata', [LaporanPerbulanController::class, 'filter'])->middleware('auth')->name('laporanperbulandata');
+Route::get('/detailcetaklaporanperbulan/{id}', [LaporanPerbulanController::class, 'detail'])->middleware('auth')->name('detailcetaklaporanperbulan');
+
+
+// Laporan Pertahun
+Route::get('/laporanpertahun', [LaporanPertahunController::class, 'index'])->middleware('auth')->name('laporanpertahun');
+Route::post('/laporanpertahundata', [LaporanPertahunController::class, 'filter'])->middleware('auth')->name('laporanpertahundata');
+Route::get('/detailcetaklaporanpertahun/{id}', [LaporanPertahunController::class, 'detail'])->middleware('auth')->name('detailcetaklaporanpertahun');
+
